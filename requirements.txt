@@ -1,0 +1,6 @@
+newton==1.7.0
+warp-lang>=1.18
+mujoco~=3.15.0
+mujoco-warp~=3.15.0
+numpy
+openai>=1.40

@@ -1,0 +1,2 @@
+Example input written for this demo (not a quotation): adult tigers stand about 0.95 m at the shoulder,
+with a head and body length near 1.82 m and a tail of about 0.85 m.
