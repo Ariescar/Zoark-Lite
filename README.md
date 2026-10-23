@@ -34,21 +34,32 @@ With a Nebius Token Factory key, Nemotron reads and composes:
 
 ```bash
 export NEBIUS_API_KEY=...                                    # https://tokenfactory.nebius.com
-export NEMOTRON_MODEL=nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B  # default
-export NEMOTRON_VISION_MODEL=<Nemotron model on Token Factory that reads images>   # for --image
 
-python -m zlite extract --text examples/source.txt
-python -m zlite extract --image photo.jpg
+python -m zlite models                                       # Nemotron models this key can use
+python -m zlite extract --text examples/source_snow_leopard.txt --save   # new species from a text
+python -m zlite extract --image photo.jpg                    # needs a Nemotron model that reads images
 python -m zlite order "front-heavy quadruped with a long tail for balance" -n 20 -o out/order1
 ```
 
-Add species by dropping a JSON file into `species/` (`name`, `shoulder_height_m`, `head_body_length_m`, `tail_length_m`), or create one with `extract`.
+Models are picked from Token Factory's own list (`GET /models`): the fastest Nemotron text model for reading and composing, a Nemotron VL/Omni model for photos. Pin them with `NEMOTRON_MODEL` / `NEMOTRON_VISION_MODEL`. Every Nemotron result is saved with a `_nemotron` record (model id, token usage, time), and `order` keeps it in `manifest.json`.
 
-### On Nebius AI Cloud
+Windows, all steps in one go: `powershell -ExecutionPolicy Bypass -File scripts\run_nemotron.ps1`
+
+Add species by dropping a JSON file into `species/` (`name`, `shoulder_height_m`, `head_body_length_m`, `tail_length_m`), or create one with `extract --save`.
+
+### On Nebius AI Cloud (Serverless AI job, GPU)
 
 ```bash
+# Nebius CLI installed and logged in; first a dry run, then -Run to create the job
+powershell -ExecutionPolicy Bypass -File scripts\nebius_job.ps1
+powershell -ExecutionPolicy Bypass -File scripts\nebius_job.ps1 -Run
+```
+The job clones this repository into `python:3.12` on an L40S GPU and runs `scripts/cloud_job.sh`: it builds and stand-tests 64 variants of the Nemotron structure in `examples/nemotron_compose.json` with NVIDIA Newton, and prints the device, `manifest.json` and `results.csv` to the job log. No API key goes to the cloud.
+
+Or with Docker on any GPU machine:
+```bash
 docker build -t zoark-lite .
-docker run --gpus all -e NEBIUS_API_KEY=$NEBIUS_API_KEY -v $PWD/out:/app/out zoark-lite
+docker run --gpus all -v $PWD/out:/app/out zoark-lite
 ```
 NVIDIA Warp picks the GPU automatically; without a GPU it runs on CPU.
 
@@ -69,7 +80,7 @@ out/demo/
 - **NVIDIA Nemotron via Nebius Token Factory** (`zlite/reader.py`): `extract()` reads source text or a photo into measurements; `compose()` turns a request into a creature structure. Nemotron is asked to interpret only; every number must come from the source.
 - **Where Token Factory helped:** one OpenAI-compatible endpoint, no GPU to manage, so the reading step worked from day one in both this engine and the zoark.org site, billed per request.
 - **NVIDIA Newton** (`zlite/physics.py`): each variant becomes an articulated body (free trunk, PD-held hinge joints) dropped on a ground plane and solved with Newton's MuJoCo solver; the run decides pass/fail.
-- **Nebius AI Cloud**: GPU instances run the batch simulations (Dockerfile above).
+- **Nebius AI Cloud**: a Serverless AI job on a GPU runs the batch simulations (`scripts/nebius_job.ps1`, `scripts/cloud_job.sh`).
 
 ## Scope
 

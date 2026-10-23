@@ -6,6 +6,7 @@ import glob
 import json
 import os
 import random
+import time
 
 from .body import make_body
 from .mjcf import to_mjcf
@@ -28,7 +29,7 @@ def run(structure: dict, species: dict, n: int, out_dir: str, seconds: float = 2
     ranges = structure.get("ranges", {k: [0.85, 1.25] for k in KEYS})
     rng = random.Random(seed)
     os.makedirs(out_dir, exist_ok=True)
-    rows, passed = [], 0
+    rows, passed, t0 = [], 0, time.time()
     for i in range(n):
         k = {key: round(scale.get(key, 1.0) * rng.uniform(*ranges.get(key, [1, 1])), 3) for key in KEYS}
         body = make_body(base, size=scale.get("size", 1.0), **k)
@@ -47,6 +48,7 @@ def run(structure: dict, species: dict, n: int, out_dir: str, seconds: float = 2
     with open(os.path.join(out_dir, "results.csv"), "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(rows[0]))
         w.writeheader(); w.writerows(rows)
-    manifest = {"structure": structure, "simulated": n, "passed": passed, "physics": "NVIDIA Newton stand test"}
+    manifest = {"structure": structure, "simulated": n, "passed": passed, "physics": "NVIDIA Newton stand test",
+                "engine": sim["engine"], "device": sim["device"], "seconds_wall": round(time.time() - t0, 1)}
     json.dump(manifest, open(os.path.join(out_dir, "manifest.json"), "w"), indent=1)
     return manifest
