@@ -26,7 +26,7 @@ The standing and walking numbers shown on zoark.org are static estimates. Physic
 | Nemotron, compose (Token Factory) | `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B`, 197 prompt + 1249 completion tokens, 2026-10-27 04:04 UTC → [`examples/nemotron_compose.json`](examples/nemotron_compose.json) (base `Panthera tigris`) |
 | NVIDIA Newton, local | Newton 1.7.0 on `cuda:0` (RTX 4060 Ti): **12 / 12 variants pass**, 276.5 s → [`examples/runs/local/`](examples/runs/local/) |
 | Nebius AI Cloud job | not run yet |
-| zoark.org species written by Nemotron | [ARK-MAM-C2KGE5](https://zoark.org/specimen/ARK-MAM-C2KGE5) Snowstalker · [ARK-MAM-WW4M6K](https://zoark.org/specimen/ARK-MAM-WW4M6K) Formosan Black Bear |
+| zoark.org species written by Nemotron | [ARK-MAM-C2KGE5](https://zoark.org/specimen/ARK-MAM-C2KGE5) Snowstalker · [ARK-MAM-WW4M6K](https://zoark.org/specimen/ARK-MAM-WW4M6K) Formosan Black Bear (`NVIDIA-Nemotron-3-Nano-30B-A3B`) · [ARK-MAM-AF2DBF](https://zoark.org/specimen/ARK-MAM-AF2DBF) Giraffe with bushy fox tail, from a photo + one sentence (`Nemotron-3.5-Super-VL`) |
 
 ## Quick start
 
