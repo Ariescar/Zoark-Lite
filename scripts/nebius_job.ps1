@@ -4,8 +4,8 @@
 # When the printed job looks right, create it for real:
 #   powershell -ExecutionPolicy Bypass -File scripts\nebius_job.ps1 -Run
 param([switch]$Run, [int]$N = 64, [string]$Platform = "gpu-l40s-a", [string]$Preset = "1gpu-8vcpu-32gb")
-$name = "zoark-lite-" + (Get-Date -Format "yyyyMMdd-HHmm")
-$inner = "git clone --depth 1 https://github.com/Ariescar/Zoark-Lite /app && N=$N bash /app/scripts/cloud_job.sh"
+$name = "zoark-" + (Get-Date -Format "yyyyMMdd-HHmm")
+$inner = "git clone --depth 1 https://github.com/Ariescar/Zoark /app && N=$N bash /app/scripts/cloud_job.sh"
 $a = @("ai", "job", "create", "--name", $name, "--image", "python:3.12",
        "--container-command", "bash", "--args", "-c '$inner'",
        "--env", "NVIDIA_DRIVER_CAPABILITIES=compute,utility",

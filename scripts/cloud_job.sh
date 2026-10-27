@@ -5,9 +5,9 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 pip install -q --root-user-action=ignore -r requirements.txt
 echo "=== device ==="
-python -m zlite device
+python -m zoark device
 STRUCT="${STRUCT:-examples/nemotron_compose.json}"
 [ -f "$STRUCT" ] || STRUCT=examples/structure.json
-python -m zlite order --structure "$STRUCT" -n "${N:-64}" -o out/cloud
+python -m zoark order --structure "$STRUCT" -n "${N:-64}" -o out/cloud
 echo "=== manifest.json ==="; cat out/cloud/manifest.json
 echo; echo "=== results.csv ==="; cat out/cloud/results.csv

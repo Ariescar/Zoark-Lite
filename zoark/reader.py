@@ -70,7 +70,7 @@ def resolve(need_vision: bool = False, cl=None) -> str:
     if not model:
         kind = "image-reading " if need_vision else ""
         raise SystemExit(f"No {kind}Nemotron model found on Token Factory for this key. "
-                         f"Run `python -m zlite models` and set NEMOTRON_{'VISION_' if need_vision else ''}MODEL.")
+                         f"Run `python -m zoark models` and set NEMOTRON_{'VISION_' if need_vision else ''}MODEL.")
     return model
 
 

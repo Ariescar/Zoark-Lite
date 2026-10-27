@@ -1,11 +1,11 @@
-"""Zoark-Lite command line.
+"""Zoark command line.
 
-  python -m zlite simulate "Panthera tigris"
-  python -m zlite order --structure examples/structure.json -n 12 -o out/demo
-  python -m zlite models                                                                         (needs NEBIUS_API_KEY)
-  python -m zlite extract --text examples/source.txt --save                                      (needs NEBIUS_API_KEY)
-  python -m zlite order "front-heavy quadruped with a long tail for balance" -n 12 -o out/demo   (needs NEBIUS_API_KEY)
-  python -m zlite device                                                                         (which CPU/GPU Newton runs on)
+  python -m zoark simulate "Panthera tigris"
+  python -m zoark order --structure examples/structure.json -n 12 -o out/demo
+  python -m zoark models                                                                         (needs NEBIUS_API_KEY)
+  python -m zoark extract --text examples/source.txt --save                                      (needs NEBIUS_API_KEY)
+  python -m zoark order "front-heavy quadruped with a long tail for balance" -n 12 -o out/demo   (needs NEBIUS_API_KEY)
+  python -m zoark device                                                                         (which CPU/GPU Newton runs on)
 """
 import argparse
 import json
@@ -15,7 +15,7 @@ import re
 from .body import make_body
 from .order import load_species, run
 
-SPECIES = os.environ.get("ZLITE_SPECIES", os.path.join(os.path.dirname(__file__), "..", "species"))
+SPECIES = os.environ.get("ZOARK_SPECIES", os.path.join(os.path.dirname(__file__), "..", "species"))
 
 
 def _save(obj, path):
@@ -26,7 +26,7 @@ def _save(obj, path):
 
 
 def main():
-    ap = argparse.ArgumentParser(prog="zlite")
+    ap = argparse.ArgumentParser(prog="zoark")
     sub = ap.add_subparsers(dest="cmd", required=True)
     s = sub.add_parser("simulate"); s.add_argument("species"); s.add_argument("--seconds", type=float, default=2.0)
     o = sub.add_parser("order"); o.add_argument("text", nargs="?"); o.add_argument("--structure")
