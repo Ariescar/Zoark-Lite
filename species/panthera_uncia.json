@@ -1,0 +1,15 @@
+{
+ "name": "Panthera uncia",
+ "common_name": "snow leopard",
+ "shoulder_height_m": 0.6,
+ "head_body_length_m": 1.1,
+ "tail_length_m": 0.9,
+ "quote": "an adult snow leopard stands roughly 0.6 m at the shoulder. Its head and body measure about 1.1 m, and its thick tail adds close to 0.9 m more",
+ "_nemotron": {
+  "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+  "endpoint": "https://api.tokenfactory.nebius.com/v1",
+  "prompt_tokens": 165,
+  "completion_tokens": 636,
+  "at": "2026-10-27T04:03:46+00:00"
+ }
+}

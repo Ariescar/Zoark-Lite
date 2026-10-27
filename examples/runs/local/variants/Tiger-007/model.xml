@@ -1,0 +1,76 @@
+<mujoco model="Tiger-007">
+  <compiler angle="radian"/>
+  <option timestep="0.005" gravity="0 0 -9.81"/>
+  <default><geom density="1000" friction="0.75 0.005 0.0001"/><joint damping="1" limited="true" range="-1.2 1.2"/></default>
+  <worldbody>
+    <geom name="ground" type="plane" size="20 20 0.1"/>
+    <body name="trunk" pos="-0.54670 0.00000 1.21982">
+      <freejoint name="root"/>
+      <geom name="trunk" type="capsule" fromto="-0.54670 0.00000 0.00000 0.54670 0.00000 0.00000" size="0.22022"/>
+      <geom name="head" type="capsule" fromto="0.54670 0.00000 0.00000 1.14730 0.00000 0.24024" size="0.22771"/>
+      <geom name="tail" type="capsule" fromto="-0.54670 0.00000 0.00000 -2.35159 0.00000 -1.04206" size="0.04404"/>
+      <body name="fl_0" pos="0.54670 0.16016 -0.08809">
+        <joint name="fl_j0" type="hinge" axis="0 1 0"/>
+        <geom type="capsule" fromto="0 0 0 0.00000 0.00000 -0.45269" size="0.05161"/>
+        <body name="fl_1" pos="0.00000 0.00000 -0.45269">
+          <joint name="fl_j1" type="hinge" axis="0 1 0"/>
+          <geom type="capsule" fromto="0 0 0 -0.11317 0.00000 -0.43006" size="0.05161"/>
+          <body name="fl_2" pos="-0.11317 0.00000 -0.43006">
+            <joint name="fl_j2" type="hinge" axis="0 1 0"/>
+            <geom type="capsule" fromto="0 0 0 0.03395 0.00000 -0.24898" size="0.05161"/>
+          </body>
+        </body>
+      </body>
+      <body name="fr_0" pos="0.54670 -0.16016 -0.08809">
+        <joint name="fr_j0" type="hinge" axis="0 1 0"/>
+        <geom type="capsule" fromto="0 0 0 0.00000 0.00000 -0.45269" size="0.05161"/>
+        <body name="fr_1" pos="0.00000 0.00000 -0.45269">
+          <joint name="fr_j1" type="hinge" axis="0 1 0"/>
+          <geom type="capsule" fromto="0 0 0 -0.11317 0.00000 -0.43006" size="0.05161"/>
+          <body name="fr_2" pos="-0.11317 0.00000 -0.43006">
+            <joint name="fr_j2" type="hinge" axis="0 1 0"/>
+            <geom type="capsule" fromto="0 0 0 0.03395 0.00000 -0.24898" size="0.05161"/>
+          </body>
+        </body>
+      </body>
+      <body name="hl_0" pos="-0.54670 0.16016 -0.08809">
+        <joint name="hl_j0" type="hinge" axis="0 1 0"/>
+        <geom type="capsule" fromto="0 0 0 0.00000 0.00000 -0.40742" size="0.05677"/>
+        <body name="hl_1" pos="0.00000 0.00000 -0.40742">
+          <joint name="hl_j1" type="hinge" axis="0 1 0"/>
+          <geom type="capsule" fromto="0 0 0 0.13581 0.00000 -0.45269" size="0.05677"/>
+          <body name="hl_2" pos="0.13581 0.00000 -0.45269">
+            <joint name="hl_j2" type="hinge" axis="0 1 0"/>
+            <geom type="capsule" fromto="0 0 0 -0.05659 0.00000 -0.27162" size="0.05677"/>
+          </body>
+        </body>
+      </body>
+      <body name="hr_0" pos="-0.54670 -0.16016 -0.08809">
+        <joint name="hr_j0" type="hinge" axis="0 1 0"/>
+        <geom type="capsule" fromto="0 0 0 0.00000 0.00000 -0.40742" size="0.05677"/>
+        <body name="hr_1" pos="0.00000 0.00000 -0.40742">
+          <joint name="hr_j1" type="hinge" axis="0 1 0"/>
+          <geom type="capsule" fromto="0 0 0 0.13581 0.00000 -0.45269" size="0.05677"/>
+          <body name="hr_2" pos="0.13581 0.00000 -0.45269">
+            <joint name="hr_j2" type="hinge" axis="0 1 0"/>
+            <geom type="capsule" fromto="0 0 0 -0.05659 0.00000 -0.27162" size="0.05677"/>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+  <actuator>
+    <position name="fl_j0_act" joint="fl_j0" kp="24316.3" kv="1215.8"/>
+    <position name="fl_j1_act" joint="fl_j1" kp="24316.3" kv="1215.8"/>
+    <position name="fl_j2_act" joint="fl_j2" kp="24316.3" kv="1215.8"/>
+    <position name="fr_j0_act" joint="fr_j0" kp="24316.3" kv="1215.8"/>
+    <position name="fr_j1_act" joint="fr_j1" kp="24316.3" kv="1215.8"/>
+    <position name="fr_j2_act" joint="fr_j2" kp="24316.3" kv="1215.8"/>
+    <position name="hl_j0_act" joint="hl_j0" kp="24316.3" kv="1215.8"/>
+    <position name="hl_j1_act" joint="hl_j1" kp="24316.3" kv="1215.8"/>
+    <position name="hl_j2_act" joint="hl_j2" kp="24316.3" kv="1215.8"/>
+    <position name="hr_j0_act" joint="hr_j0" kp="24316.3" kv="1215.8"/>
+    <position name="hr_j1_act" joint="hr_j1" kp="24316.3" kv="1215.8"/>
+    <position name="hr_j2_act" joint="hr_j2" kp="24316.3" kv="1215.8"/>
+  </actuator>
+</mujoco>

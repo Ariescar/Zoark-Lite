@@ -12,9 +12,21 @@ Built for the **Nebius × NVIDIA Global AI Hackathon** (Best Apps and Agents). L
 |---|---|---|
 | Extract | Read a text or an animal photo and pull out body measurements | NVIDIA Nemotron on Nebius Token Factory |
 | Compose | Turn a plain-language request into a creature structure | NVIDIA Nemotron on Nebius Token Factory |
-| Build | Lay out a parametric quadruped body from the measurements | — |
-| Prove | Stand test of every variant: does it stay up and level, where is its centre of mass | NVIDIA Newton (GPU on Nebius AI Cloud, or CPU) |
+| Build | Lay out a parametric quadruped body from the measurements | Nebius AI Cloud (the zoark.org engine; Zoark-Lite builds locally or in a Serverless AI job) |
+| Prove | Stand test of every variant: does it stay up and level, where is its centre of mass | NVIDIA Newton (Zoark-Lite, on any CUDA GPU or CPU) |
 | Package | Variants that pass → MJCF + body + simulation JSON + results.csv | — |
+
+The standing and walking numbers shown on zoark.org are static estimates. Physics validation is done by Zoark-Lite with NVIDIA Newton.
+
+## Verified runs
+
+| Run | Result |
+|---|---|
+| Nemotron, extract (Token Factory) | `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B`, 165 prompt + 636 completion tokens, 2026-10-27 04:03 UTC → [`examples/nemotron_extract.json`](examples/nemotron_extract.json), new species [`species/panthera_uncia.json`](species/panthera_uncia.json) |
+| Nemotron, compose (Token Factory) | `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B`, 197 prompt + 1249 completion tokens, 2026-10-27 04:04 UTC → [`examples/nemotron_compose.json`](examples/nemotron_compose.json) (base `Panthera tigris`) |
+| NVIDIA Newton, local | Newton 1.7.0 on `cuda:0` (RTX 4060 Ti): **12 / 12 variants pass**, 276.5 s → [`examples/runs/local/`](examples/runs/local/) |
+| Nebius AI Cloud job | not run yet |
+| zoark.org species written by Nemotron | [ARK-MAM-C2KGE5](https://zoark.org/specimen/ARK-MAM-C2KGE5) Snowstalker · [ARK-MAM-WW4M6K](https://zoark.org/specimen/ARK-MAM-WW4M6K) Formosan Black Bear |
 
 ## Quick start
 
